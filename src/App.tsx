@@ -30,13 +30,25 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import OneSignal from 'onesignal-cordova-plugin';
 
 /* Theme variables */
 import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+
+  const OneSignalInit = () =>{
+    OneSignal.setAppId("b92bfa4c-21f3-4f64-8239-b55fa25794d8");
+    OneSignal.setNotificationOpenedHandler(function(jsonData){
+      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData))
+    })
+  }
+
+  OneSignalInit();
+  
+return(
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -71,6 +83,6 @@ const App: React.FC = () => (
       </IonTabs>
     </IonReactRouter>
   </IonApp>
-);
+);}
 
 export default App;
